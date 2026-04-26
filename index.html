@@ -1,0 +1,1865 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ANXIETYSENSE - Multi-Modal AI Ecosystem for Mental Health Support</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;600;700;800&family=Merriweather:wght@400;700&display=swap" rel="stylesheet" />
+    <style>
+      :root {
+        --primary-color: #5c6bc0;
+        --secondary-color: #3949ab;
+        --accent-color: #ab47bc;
+        --accent2-color: #26a69a;
+        --light-color: #f3f4fd;
+        --dark-color: #1a1a2e;
+        --white: #ffffff;
+        --gray: #f0f0f0;
+        --text-muted: #6b7280;
+        --child-color: #f59e0b;
+        --young-color: #ef4444;
+        --pregnant-color: #3b82f6;
+        --elderly-color: #8b5cf6;
+      }
+
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: "Nunito", sans-serif;
+      }
+
+      body {
+        background-color: var(--light-color);
+        color: var(--dark-color);
+        line-height: 1.6;
+      }
+
+      .container {
+        width: 90%;
+        max-width: 1400px;
+        margin: 0 auto;
+      }
+
+      /* ─── HEADER ─── */
+      header {
+        background-color: var(--white);
+        box-shadow: 0 2px 15px rgba(92, 107, 192, 0.12);
+        position: sticky;
+        top: 0;
+        z-index: 1000;
+      }
+
+      .header-container {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 0.9rem 0;
+      }
+
+      .logo {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        text-decoration: none;
+      }
+
+      .logo-icon {
+        width: 46px;
+        height: 46px;
+        background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
+        border-radius: 12px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 22px;
+        color: white;
+        flex-shrink: 0;
+      }
+
+      .logo h1 {
+        color: var(--primary-color);
+        font-size: 1.35rem;
+        font-weight: 800;
+        letter-spacing: -0.3px;
+        line-height: 1.2;
+      }
+
+      .logo h1 span {
+        color: var(--accent-color);
+      }
+
+      nav ul {
+        display: flex;
+        list-style: none;
+        gap: 0.2rem;
+      }
+
+      nav ul li a {
+        text-decoration: none;
+        color: var(--dark-color);
+        font-weight: 600;
+        font-size: 0.88rem;
+        padding: 6px 12px;
+        border-radius: 8px;
+        transition: all 0.25s;
+      }
+
+      nav ul li a:hover,
+      nav ul li a.active {
+        color: var(--primary-color);
+        background: rgba(92, 107, 192, 0.1);
+      }
+
+      .mobile-nav-toggle {
+        display: none;
+        background: transparent;
+        border: none;
+        font-size: 1.5rem;
+        color: var(--primary-color);
+        cursor: pointer;
+      }
+
+      .search-container {
+        display: flex;
+        align-items: center;
+        margin-left: 1rem;
+      }
+
+      .search-form {
+        display: flex;
+        position: relative;
+      }
+
+      .search-input {
+        padding: 0.45rem 1rem;
+        border: 1.5px solid #ddd;
+        border-radius: 20px;
+        font-size: 0.85rem;
+        width: 160px;
+        transition: all 0.3s;
+        font-family: "Nunito", sans-serif;
+      }
+
+      .search-input:focus {
+        width: 200px;
+        outline: none;
+        box-shadow: 0 0 0 3px rgba(92, 107, 192, 0.15);
+        border-color: var(--primary-color);
+      }
+
+      .search-button {
+        background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
+        border: none;
+        color: white;
+        border-radius: 20px;
+        padding: 0.45rem 1rem;
+        margin-left: 0.5rem;
+        cursor: pointer;
+        transition: opacity 0.3s;
+      }
+
+      .search-button:hover { opacity: 0.85; }
+
+      /* ─── HERO ─── */
+      .hero {
+        min-height: 88vh;
+        background: linear-gradient(135deg, rgba(26, 26, 46, 0.92) 0%, rgba(57, 73, 171, 0.88) 100%),
+          url("https://images.unsplash.com/photo-1559757175-7cb5b1b3d9de?ixlib=rb-4.0.3&auto=format&fit=crop&w=1740&q=80");
+        background-size: cover;
+        background-position: center;
+        color: var(--white);
+        display: flex;
+        align-items: center;
+        text-align: center;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .hero::before {
+        content: '';
+        position: absolute;
+        inset: 0;
+        background: radial-gradient(ellipse at 60% 50%, rgba(171, 71, 188, 0.18) 0%, transparent 70%);
+      }
+
+      .hero-content {
+        max-width: 860px;
+        margin: 0 auto;
+        padding: 2rem;
+        position: relative;
+        z-index: 1;
+      }
+
+      .hero-badge {
+        display: inline-block;
+        background: rgba(255,255,255,0.12);
+        border: 1px solid rgba(255,255,255,0.25);
+        color: rgba(255,255,255,0.9);
+        font-size: 0.8rem;
+        font-weight: 700;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        padding: 6px 20px;
+        border-radius: 100px;
+        margin-bottom: 28px;
+      }
+
+      .hero-content h2 {
+        font-family: "Merriweather", serif;
+        font-size: clamp(2rem, 4.5vw, 3.4rem);
+        margin-bottom: 1.2rem;
+        font-weight: 700;
+        line-height: 1.2;
+      }
+
+      .hero-content h2 span { color: #c084fc; }
+
+      .hero-content p {
+        font-size: 1.1rem;
+        margin-bottom: 2.2rem;
+        opacity: 0.88;
+        max-width: 680px;
+        margin-left: auto;
+        margin-right: auto;
+        font-weight: 400;
+        line-height: 1.75;
+      }
+
+      .hero-stats {
+        display: flex;
+        justify-content: center;
+        gap: 40px;
+        margin-bottom: 2.5rem;
+        flex-wrap: wrap;
+      }
+
+      .hero-stat {
+        text-align: center;
+      }
+
+      .hero-stat-num {
+        font-family: "Merriweather", serif;
+        font-size: 2.2rem;
+        font-weight: 700;
+        color: #c084fc;
+        line-height: 1;
+      }
+
+      .hero-stat-label {
+        font-size: 0.78rem;
+        opacity: 0.7;
+        margin-top: 4px;
+        font-weight: 600;
+        letter-spacing: 0.05em;
+        text-transform: uppercase;
+      }
+
+      .hero-buttons {
+        display: flex;
+        gap: 16px;
+        justify-content: center;
+        flex-wrap: wrap;
+      }
+
+      .btn {
+        display: inline-block;
+        padding: 0.8rem 2rem;
+        background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
+        color: var(--white);
+        border: none;
+        border-radius: 30px;
+        text-decoration: none;
+        font-weight: 700;
+        font-family: "Nunito", sans-serif;
+        transition: all 0.3s;
+        letter-spacing: 0.03em;
+        box-shadow: 0 4px 20px rgba(92, 107, 192, 0.35);
+        cursor: pointer;
+        font-size: 0.95rem;
+      }
+
+      .btn:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 8px 28px rgba(92, 107, 192, 0.45);
+        opacity: 0.92;
+      }
+
+      .btn-outline {
+        background: transparent;
+        border: 2px solid rgba(255,255,255,0.5);
+        color: white;
+        box-shadow: none;
+      }
+
+      .btn-outline:hover {
+        background: rgba(255,255,255,0.1);
+        border-color: white;
+        box-shadow: none;
+      }
+
+      /* ─── SECTIONS ─── */
+      .section { padding: 5rem 0; }
+
+      .section-header {
+        text-align: center;
+        margin-bottom: 3.5rem;
+      }
+
+      .section-header h2 {
+        font-family: "Merriweather", serif;
+        font-size: clamp(1.7rem, 3vw, 2.4rem);
+        color: var(--primary-color);
+        margin-bottom: 1rem;
+        position: relative;
+        display: inline-block;
+      }
+
+      .section-header h2::after {
+        content: "";
+        position: absolute;
+        width: 56px;
+        height: 4px;
+        bottom: -12px;
+        left: 50%;
+        transform: translateX(-50%);
+        background: linear-gradient(90deg, var(--primary-color), var(--accent-color));
+        border-radius: 2px;
+      }
+
+      .section-header p {
+        color: var(--text-muted);
+        font-size: 1.05rem;
+        margin-top: 20px;
+        max-width: 600px;
+        margin-left: auto;
+        margin-right: auto;
+      }
+
+      /* ─── DOMAIN CARDS ─── */
+      .domain-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 2rem;
+      }
+
+      .domain-card {
+        background: var(--white);
+        border-radius: 16px;
+        overflow: hidden;
+        box-shadow: 0 4px 20px rgba(92, 107, 192, 0.08);
+        transition: transform 0.3s, box-shadow 0.3s;
+      }
+
+      .domain-card:hover {
+        transform: translateY(-6px);
+        box-shadow: 0 16px 40px rgba(92, 107, 192, 0.16);
+      }
+
+      .domain-card-img {
+        height: 200px;
+        overflow: hidden;
+      }
+
+      .domain-card-img img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: transform 0.5s;
+      }
+
+      .domain-card:hover .domain-card-img img { transform: scale(1.06); }
+
+      .domain-card-content { padding: 1.6rem; }
+
+      .domain-card-content h3 {
+        color: var(--primary-color);
+        margin-bottom: 0.6rem;
+        font-size: 1.25rem;
+        font-weight: 700;
+      }
+
+      .domain-card-content p { color: var(--text-muted); line-height: 1.7; }
+
+      /* ─── RESEARCH SECTIONS ─── */
+      .research-section {
+        background: var(--white);
+        border-radius: 16px;
+        padding: 2.2rem;
+        margin-bottom: 2rem;
+        box-shadow: 0 4px 20px rgba(92, 107, 192, 0.07);
+        border-left: 4px solid var(--primary-color);
+      }
+
+      .research-section h3 {
+        color: var(--primary-color);
+        font-family: "Merriweather", serif;
+        font-size: 1.45rem;
+        margin-bottom: 1rem;
+        padding-bottom: 0.6rem;
+        border-bottom: 1px solid rgba(92, 107, 192, 0.12);
+      }
+
+      .research-section p {
+        color: #374151;
+        margin-bottom: 1rem;
+        line-height: 1.78;
+        text-align: justify;
+      }
+
+      .objectives-list { list-style: none; margin-top: 0.5rem; }
+
+      .objectives-list li {
+        position: relative;
+        padding-left: 1.8rem;
+        margin-bottom: 1rem;
+        color: #374151;
+        line-height: 1.7;
+      }
+
+      .objectives-list li::before {
+        content: "→";
+        position: absolute;
+        left: 0;
+        top: 0;
+        color: var(--accent-color);
+        font-weight: 800;
+      }
+
+      /* ─── FEATURES ─── */
+      .features { background: var(--white); }
+
+      .features-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: 1.8rem;
+      }
+
+      .feature-card {
+        text-align: center;
+        padding: 2.2rem 1.8rem;
+        border-radius: 16px;
+        background: var(--light-color);
+        box-shadow: 0 4px 16px rgba(92, 107, 192, 0.07);
+        transition: transform 0.3s, box-shadow 0.3s;
+        border-top: 3px solid transparent;
+      }
+
+      .feature-card:hover {
+        transform: translateY(-6px);
+        box-shadow: 0 16px 40px rgba(92, 107, 192, 0.15);
+        border-top-color: var(--primary-color);
+      }
+
+      .feature-icon {
+        width: 68px;
+        height: 68px;
+        background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
+        border-radius: 18px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.8rem;
+        color: white;
+        margin: 0 auto 1.2rem;
+      }
+
+      .feature-card h3 {
+        color: var(--primary-color);
+        margin-bottom: 0.8rem;
+        font-size: 1.15rem;
+        font-weight: 700;
+      }
+
+      .feature-card p { color: var(--text-muted); font-size: 0.95rem; line-height: 1.7; }
+
+      /* Module-specific feature colors */
+      .fc-child .feature-icon { background: linear-gradient(135deg, #f59e0b, #fbbf24); }
+      .fc-young .feature-icon { background: linear-gradient(135deg, #ef4444, #f87171); }
+      .fc-pregnant .feature-icon { background: linear-gradient(135deg, #3b82f6, #60a5fa); }
+      .fc-elderly .feature-icon { background: linear-gradient(135deg, #8b5cf6, #a78bfa); }
+      .fc-rec .feature-icon { background: linear-gradient(135deg, #10b981, #34d399); }
+      .fc-fire .feature-icon { background: linear-gradient(135deg, #f97316, #fb923c); }
+
+      /* ─── TECHNOLOGIES ─── */
+      .technologies { background: var(--light-color); }
+
+      .tech-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+        gap: 1.8rem;
+      }
+
+      .tech-card {
+        background: var(--white);
+        border-radius: 16px;
+        padding: 2rem;
+        text-align: center;
+        box-shadow: 0 4px 16px rgba(92, 107, 192, 0.07);
+        transition: transform 0.3s, box-shadow 0.3s;
+      }
+
+      .tech-card:hover {
+        transform: translateY(-6px);
+        box-shadow: 0 16px 40px rgba(92, 107, 192, 0.15);
+      }
+
+      .tech-icon {
+        width: 64px;
+        height: 64px;
+        border-radius: 16px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.7rem;
+        color: white;
+        margin: 0 auto 1.2rem;
+      }
+
+      .tech-card h3 {
+        color: var(--primary-color);
+        margin-bottom: 0.7rem;
+        font-size: 1.1rem;
+        font-weight: 700;
+      }
+
+      .tech-card p { color: var(--text-muted); font-size: 0.92rem; line-height: 1.65; }
+
+      /* ─── MILESTONES ─── */
+      .milestones {
+        background: linear-gradient(135deg, var(--dark-color) 0%, #2d2d6b 100%);
+        color: var(--white);
+      }
+
+      .milestones .section-header h2 { color: var(--white); }
+      .milestones .section-header h2::after { background: linear-gradient(90deg, #c084fc, var(--accent-color)); }
+      .milestones .section-header p { color: rgba(255,255,255,0.65); }
+
+      .milestone-list { list-style: none; max-width: 820px; margin: 0 auto; }
+
+      .milestone-item {
+        background: rgba(255,255,255,0.07);
+        border: 1px solid rgba(255,255,255,0.1);
+        border-radius: 14px;
+        padding: 1.5rem 2rem;
+        margin-bottom: 1rem;
+        display: flex;
+        align-items: center;
+        gap: 1.5rem;
+        transition: transform 0.3s, background 0.3s;
+      }
+
+      .milestone-item:hover {
+        transform: translateX(10px);
+        background: rgba(255,255,255,0.13);
+      }
+
+      .milestone-icon {
+        font-size: 1.8rem;
+        color: #c084fc;
+        flex-shrink: 0;
+        width: 48px;
+        text-align: center;
+      }
+
+      .milestone-content h3 { font-size: 1.1rem; margin-bottom: 0.3rem; font-weight: 700; }
+      .milestone-content p { font-size: 0.9rem; opacity: 0.7; margin-bottom: 0.4rem; }
+
+      .milestone-date {
+        font-size: 0.82rem;
+        color: #c084fc;
+        font-weight: 700;
+        letter-spacing: 0.05em;
+      }
+
+      /* ─── DOCUMENTS ─── */
+      .documents { background: var(--light-color); }
+
+      .documents-list { list-style: none; max-width: 860px; margin: 0 auto; }
+
+      .document-item {
+        background: var(--white);
+        border-radius: 14px;
+        padding: 1.4rem 1.8rem;
+        margin-bottom: 1rem;
+        display: flex;
+        align-items: flex-start;
+        gap: 1.2rem;
+        box-shadow: 0 4px 16px rgba(92, 107, 192, 0.07);
+        transition: transform 0.3s, box-shadow 0.3s;
+      }
+
+      .document-item:hover {
+        transform: translateX(8px);
+        box-shadow: 0 8px 32px rgba(92, 107, 192, 0.14);
+      }
+
+      .document-icon {
+        font-size: 1.8rem;
+        color: var(--primary-color);
+        flex-shrink: 0;
+        padding-top: 2px;
+      }
+
+      .document-content { flex: 1; }
+
+      .document-content h3 {
+        color: var(--primary-color);
+        margin-bottom: 0.3rem;
+        font-size: 1.05rem;
+        font-weight: 700;
+      }
+
+      .document-content p { color: var(--text-muted); font-size: 0.9rem; margin-bottom: 0.5rem; }
+
+      .document-link {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        color: var(--accent-color);
+        text-decoration: none;
+        font-weight: 700;
+        font-size: 0.9rem;
+        transition: color 0.3s;
+      }
+
+      .document-link:hover { color: var(--primary-color); }
+
+      .pdf-viewer {
+        margin-top: 1rem;
+        background: var(--white);
+        border-radius: 12px;
+        overflow: hidden;
+        box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+      }
+
+      .pdf-viewer iframe {
+        width: 100%;
+        height: 560px;
+        border: none;
+      }
+
+      /* ─── TEAM ─── */
+      .team-section { background: var(--white); }
+
+      .team-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+        gap: 1.8rem;
+      }
+
+      .team-card {
+        background: var(--white);
+        border-radius: 16px;
+        overflow: hidden;
+        box-shadow: 0 4px 20px rgba(92, 107, 192, 0.1);
+        transition: transform 0.3s, box-shadow 0.3s;
+        border: 1px solid rgba(92, 107, 192, 0.08);
+      }
+
+      .team-card:hover {
+        transform: translateY(-6px);
+        box-shadow: 0 20px 40px rgba(92, 107, 192, 0.18);
+      }
+
+      .team-img {
+        height: 280px;
+        overflow: hidden;
+        background: linear-gradient(135deg, var(--light-color), #e0e7ff);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        position: relative;
+      }
+
+      .team-img img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: transform 0.5s;
+      }
+
+      .team-card:hover .team-img img { transform: scale(1.05); }
+
+      .team-avatar-placeholder {
+        font-size: 5rem;
+        opacity: 0.5;
+      }
+
+      .team-content {
+        padding: 1.4rem;
+        text-align: center;
+      }
+
+      .team-content h3 {
+        color: var(--primary-color);
+        margin-bottom: 0.3rem;
+        font-size: 1.05rem;
+        font-weight: 800;
+      }
+
+      .team-role {
+        color: var(--text-muted);
+        font-size: 0.85rem;
+        margin-bottom: 0.5rem;
+        font-weight: 600;
+      }
+
+      .team-id {
+        font-size: 0.78rem;
+        color: var(--accent-color);
+        font-weight: 700;
+        letter-spacing: 0.05em;
+        margin-bottom: 0.8rem;
+      }
+
+      .team-socials {
+        display: flex;
+        justify-content: center;
+        gap: 0.6rem;
+        padding: 0.8rem 1.4rem 1.2rem;
+      }
+
+      .team-socials a {
+        width: 34px;
+        height: 34px;
+        background: var(--light-color);
+        color: var(--primary-color);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 0.85rem;
+        transition: all 0.3s;
+        text-decoration: none;
+      }
+
+      .team-socials a:hover {
+        background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
+        color: white;
+        transform: translateY(-2px);
+      }
+
+      .supervisor-section { margin-top: 3.5rem; }
+
+      .supervisor-section > h3 {
+        color: var(--primary-color);
+        font-family: "Merriweather", serif;
+        font-size: 1.5rem;
+        margin-bottom: 2rem;
+        text-align: center;
+      }
+
+      .supervisors-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: 2rem;
+        max-width: 700px;
+        margin: 0 auto;
+      }
+
+      .supervisor-card {
+        background: var(--white);
+        border-radius: 16px;
+        overflow: hidden;
+        box-shadow: 0 4px 20px rgba(92, 107, 192, 0.1);
+        transition: transform 0.3s, box-shadow 0.3s;
+        border-top: 4px solid var(--primary-color);
+      }
+
+      .supervisor-card:hover {
+        transform: translateY(-6px);
+        box-shadow: 0 20px 40px rgba(92, 107, 192, 0.18);
+      }
+
+      .supervisor-img {
+        height: 340px;
+        overflow: hidden;
+        background: linear-gradient(135deg, #e0e7ff, #f3e8ff);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .supervisor-img img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: transform 0.5s;
+      }
+
+      .supervisor-card:hover .supervisor-img img { transform: scale(1.04); }
+
+      .supervisor-content {
+        padding: 1.6rem;
+        text-align: center;
+      }
+
+      .supervisor-content h3 {
+        color: var(--primary-color);
+        margin-bottom: 0.3rem;
+        font-size: 1.2rem;
+        font-weight: 800;
+      }
+
+      .supervisor-role {
+        color: var(--accent-color);
+        font-size: 0.9rem;
+        font-weight: 700;
+        margin-bottom: 0.8rem;
+        letter-spacing: 0.05em;
+        text-transform: uppercase;
+      }
+
+      .supervisor-details {
+        color: var(--text-muted);
+        font-size: 0.88rem;
+        line-height: 1.6;
+        margin-bottom: 1rem;
+      }
+
+      /* Clinical collaborator */
+      .collaborator-box {
+        margin-top: 2rem;
+        background: linear-gradient(135deg, rgba(92,107,192,0.06), rgba(171,71,188,0.06));
+        border: 1.5px dashed rgba(92,107,192,0.25);
+        border-radius: 16px;
+        padding: 2rem;
+        display: flex;
+        align-items: center;
+        gap: 1.5rem;
+        max-width: 720px;
+        margin-left: auto;
+        margin-right: auto;
+        margin-top: 2.5rem;
+      }
+
+      .collab-icon { font-size: 3rem; flex-shrink: 0; }
+
+      .collab-content h4 {
+        color: var(--primary-color);
+        font-size: 1.1rem;
+        font-weight: 800;
+        margin-bottom: 0.3rem;
+      }
+
+      .collab-tag {
+        display: inline-block;
+        background: rgba(171,71,188,0.1);
+        color: var(--accent-color);
+        font-size: 0.75rem;
+        font-weight: 700;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        padding: 3px 10px;
+        border-radius: 100px;
+        margin-bottom: 0.6rem;
+      }
+
+      .collab-content p { color: var(--text-muted); font-size: 0.9rem; }
+
+      /* ─── CONTACT ─── */
+      .contact {
+        background: linear-gradient(135deg, var(--dark-color) 0%, #2d2d6b 100%);
+        color: var(--white);
+      }
+
+      .contact .section-header h2 { color: var(--white); }
+      .contact .section-header p { color: rgba(255,255,255,0.65); }
+
+      .contact-container {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 2rem;
+      }
+
+      .contact-info, .contact-form {
+        background: rgba(255,255,255,0.07);
+        border: 1px solid rgba(255,255,255,0.1);
+        border-radius: 16px;
+        padding: 2rem;
+      }
+
+      .contact-info h3, .contact-form h3 {
+        color: #c084fc;
+        font-size: 1.3rem;
+        margin-bottom: 1.5rem;
+        font-weight: 700;
+      }
+
+      .contact-item {
+        display: flex;
+        align-items: flex-start;
+        gap: 1rem;
+        margin-bottom: 1.4rem;
+      }
+
+      .contact-item i { color: #c084fc; font-size: 1.1rem; margin-top: 3px; }
+
+      .contact-text h4 { font-size: 0.9rem; margin-bottom: 0.2rem; font-weight: 700; }
+      .contact-text p { font-size: 0.9rem; opacity: 0.75; }
+
+      .form-group { margin-bottom: 1.2rem; }
+
+      .form-control {
+        width: 100%;
+        padding: 0.75rem 1rem;
+        border-radius: 10px;
+        border: 1.5px solid rgba(255,255,255,0.12);
+        background: rgba(255,255,255,0.07);
+        color: var(--white);
+        font-family: "Nunito", sans-serif;
+        font-size: 0.95rem;
+        transition: border-color 0.3s;
+      }
+
+      .form-control::placeholder { color: rgba(255,255,255,0.4); }
+      .form-control:focus { border-color: #c084fc; outline: none; }
+
+      textarea.form-control { resize: vertical; min-height: 130px; }
+
+      /* ─── FOOTER ─── */
+      footer {
+        background: var(--dark-color);
+        color: var(--white);
+        padding: 3.5rem 0 1.2rem;
+        border-top: 1px solid rgba(255,255,255,0.06);
+      }
+
+      .footer-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+        gap: 2.5rem;
+        margin-bottom: 3rem;
+      }
+
+      .footer-col h3 {
+        color: #c084fc;
+        margin-bottom: 1.2rem;
+        font-size: 1.05rem;
+        font-weight: 700;
+        padding-bottom: 0.5rem;
+        border-bottom: 2px solid rgba(192,132,252,0.2);
+      }
+
+      .footer-col p { color: rgba(255,255,255,0.55); font-size: 0.9rem; line-height: 1.7; }
+
+      .footer-links { list-style: none; }
+      .footer-links li { margin-bottom: 0.7rem; }
+
+      .footer-links a {
+        color: rgba(255,255,255,0.6);
+        text-decoration: none;
+        font-size: 0.9rem;
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        transition: all 0.25s;
+      }
+
+      .footer-links a:hover { color: #c084fc; transform: translateX(4px); }
+
+      .footer-social {
+        display: flex;
+        gap: 10px;
+        margin-top: 1.2rem;
+      }
+
+      .footer-social a {
+        width: 38px;
+        height: 38px;
+        background: rgba(255,255,255,0.08);
+        color: var(--white);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: all 0.3s;
+        text-decoration: none;
+      }
+
+      .footer-social a:hover {
+        background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
+        transform: translateY(-3px);
+      }
+
+      .footer-bottom {
+        border-top: 1px solid rgba(255,255,255,0.08);
+        padding-top: 1.5rem;
+        text-align: center;
+        font-size: 0.85rem;
+        color: rgba(255,255,255,0.4);
+      }
+
+      /* ─── BACK TO TOP ─── */
+      .back-to-top {
+        position: fixed;
+        bottom: 30px;
+        right: 30px;
+        width: 48px;
+        height: 48px;
+        border-radius: 50%;
+        background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
+        color: white;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 1.1rem;
+        cursor: pointer;
+        box-shadow: 0 4px 18px rgba(92, 107, 192, 0.4);
+        opacity: 0;
+        visibility: hidden;
+        transition: all 0.3s;
+        z-index: 999;
+        text-decoration: none;
+      }
+
+      .back-to-top.visible { opacity: 1; visibility: visible; }
+      .back-to-top:hover { transform: translateY(-4px); }
+
+      /* ─── MODULE BADGE PILLS ─── */
+      .module-badges {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        margin-top: 1.2rem;
+      }
+
+      .module-badge {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        padding: 5px 14px;
+        border-radius: 100px;
+        font-size: 0.82rem;
+        font-weight: 700;
+        border: 1.5px solid;
+      }
+
+      .mb-child { background: rgba(245,158,11,0.1); border-color: rgba(245,158,11,0.4); color: #d97706; }
+      .mb-young { background: rgba(239,68,68,0.1); border-color: rgba(239,68,68,0.4); color: #dc2626; }
+      .mb-pregnant { background: rgba(59,130,246,0.1); border-color: rgba(59,130,246,0.4); color: #2563eb; }
+      .mb-elderly { background: rgba(139,92,246,0.1); border-color: rgba(139,92,246,0.4); color: #7c3aed; }
+
+      /* ─── RESPONSIVE ─── */
+      @media screen and (max-width: 768px) {
+        nav { display: none; }
+        nav.active {
+          display: block;
+          position: fixed;
+          top: 68px;
+          left: 0;
+          right: 0;
+          background: white;
+          box-shadow: 0 8px 24px rgba(0,0,0,0.12);
+          padding: 1rem;
+          z-index: 999;
+        }
+        nav.active ul { flex-direction: column; gap: 0.3rem; }
+        .mobile-nav-toggle { display: block; }
+        .search-container { display: none; }
+        .hero-stats { gap: 24px; }
+      }
+
+      @media screen and (max-width: 576px) {
+        .hero-content h2 { font-size: 1.8rem; }
+        .section { padding: 3.5rem 0; }
+        .pdf-viewer iframe { height: 300px; }
+        .collaborator-box { flex-direction: column; text-align: center; }
+      }
+    </style>
+  </head>
+  <body>
+
+    <!-- ═══════════════ HEADER ═══════════════ -->
+    <header>
+      <div class="container header-container">
+        <a href="#home" class="logo">
+          <div class="logo-icon">🧠</div>
+          <h1>ANXIETY<span>SENSE</span></h1>
+        </a>
+        <button class="mobile-nav-toggle" id="navToggle">
+          <i class="fas fa-bars"></i>
+        </button>
+        <nav id="nav">
+          <ul>
+            <li><a href="#home" class="active">Home</a></li>
+            <li><a href="#domain">Domain</a></li>
+            <li><a href="#features">Features</a></li>
+            <li><a href="#technologies">Technologies</a></li>
+            <li><a href="#milestones">Milestones</a></li>
+            <li><a href="#documents">Documents</a></li>
+            <li><a href="#team">Team</a></li>
+            <li><a href="#contact">Contact</a></li>
+          </ul>
+        </nav>
+        <div class="search-container">
+          <form class="search-form" id="searchForm">
+            <input type="text" placeholder="Search..." class="search-input" id="searchInput" />
+            <button type="submit" class="search-button"><i class="fas fa-search"></i></button>
+          </form>
+        </div>
+      </div>
+    </header>
+
+    <!-- ═══════════════ HERO ═══════════════ -->
+    <section class="hero" id="home">
+      <div class="container hero-content">
+        <div class="hero-badge">Research Project · IT4010 · SLIIT 2025</div>
+        <h2>Multi-Modal AI Ecosystem for<br /><span>Life-Stage Mental Health Support</span></h2>
+        <p>
+          ANXIETYSENSE deploys specialised, evidence-based AI models to detect, classify,
+          and manage anxiety across four demographic groups — children, young adults,
+          pregnant women, and elderly individuals — through a unified React Native mobile platform.
+        </p>
+        <div class="hero-stats">
+          <div class="hero-stat">
+            <div class="hero-stat-num">301M</div>
+            <div class="hero-stat-label">Worldwide Affected</div>
+          </div>
+          <div class="hero-stat">
+            <div class="hero-stat-num">4</div>
+            <div class="hero-stat-label">Life-Stage Modules</div>
+          </div>
+          <div class="hero-stat">
+            <div class="hero-stat-num">98%</div>
+            <div class="hero-stat-label">Peak Accuracy</div>
+          </div>
+          <div class="hero-stat">
+            <div class="hero-stat-num">4.3/5</div>
+            <div class="hero-stat-label">User Rating</div>
+          </div>
+        </div>
+        <div class="hero-buttons">
+          <a href="#features" class="btn">Explore Features</a>
+          <a href="#documents" class="btn btn-outline">View Research</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════════ DOMAIN ═══════════════ -->
+    <section class="section" id="domain">
+      <div class="container">
+        <div class="section-header">
+          <h2>Our Domain</h2>
+          <p>Understanding the landscape of digital mental health and the gap ANXIETYSENSE fills</p>
+        </div>
+
+        <div class="domain-grid">
+          <div class="domain-card">
+            <div class="domain-card-img">
+              <img src="https://images.unsplash.com/photo-1576091160550-2173dba999ef?auto=format&fit=crop&w=800&q=80" alt="Mental Health Research" />
+            </div>
+            <div class="domain-card-content">
+              <h3>Research Background</h3>
+              <p>
+                Anxiety disorders affect approximately 301 million people worldwide (WHO). Existing digital mental health tools adopt undifferentiated, one-size-fits-all approaches that fail to reflect the life-stage-specific nature of anxiety — ignoring the unique physiological, psychological, and social characteristics of each demographic group.
+              </p>
+            </div>
+          </div>
+          <div class="domain-card">
+            <div class="domain-card-img">
+              <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=800&q=80" alt="Research Problem" />
+            </div>
+            <div class="domain-card-content">
+              <h3>Research Problem</h3>
+              <p>
+                Most deployed mental health applications rely on a single modality and serve an undifferentiated adult population, leaving children, pregnant women, and elderly individuals without tools addressing their specific needs, communication styles, or digital access constraints. A seven-year-old's anxiety differs markedly from a pregnant woman's perinatal anxiety or an elderly person's health-related worry.
+              </p>
+            </div>
+          </div>
+          <div class="domain-card">
+            <div class="domain-card-img">
+              <img src="https://images.unsplash.com/photo-1551836022-d5d88e9218df?auto=format&fit=crop&w=800&q=80" alt="Methodology" />
+            </div>
+            <div class="domain-card-content">
+              <h3>Methodology</h3>
+              <p>
+                A structured, interdisciplinary methodology integrating quantitative model development, expert clinical validation, and iterative mobile application design. Developed in collaboration with licensed clinical psychologists who contributed to dataset annotation, assessment instrument validation, and evaluation of application outputs — with ethical approval from the institutional review board.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <br /><br />
+
+        <!-- Literature Survey -->
+        <div class="research-section">
+          <h3>Literature Survey</h3>
+          <p>
+            Deep convolutional neural networks trained on large-scale facial expression datasets such as FER-2013 and AffectNet have demonstrated strong generalisation to real-world emotion recognition tasks, with state-of-the-art models achieving over 70% accuracy on the seven-class expression benchmark. Transfer learning from lightweight architectures such as MobileNet has enabled deployment of capable emotion classifiers on mobile devices with acceptable inference latency, making them suitable for embedded mental health applications.
+          </p>
+          <p>
+            The use of children's drawings as diagnostic instruments has a long history in clinical psychology, with standardised systems such as the Draw-a-Person test providing frameworks for inferring emotional state from graphic features including figure size, spatial placement, colour use, and figure completeness. Computational approaches to drawing analysis have begun to emerge with promising accuracy results.
+          </p>
+          <p>
+            Voice-based emotion recognition using LSTM networks has proven effective at modelling the temporal dynamics of speech, capturing prosodic variation and energy fluctuations associated with emotional arousal and valence. Datasets such as RAVDESS and IEMOCAP provide benchmarks for speech emotion recognition. The GAD-7 has been extensively validated as a brief screening instrument for generalised anxiety disorder across diverse populations including elderly cohorts. Random Forest classifiers have shown particular robustness on small clinical tabular datasets due to their ensemble nature and resistance to overfitting.
+          </p>
+          <div class="module-badges">
+            <span class="module-badge mb-child">🧒 MobileNet V2 · Child</span>
+            <span class="module-badge mb-young">🧑 CNN + NLP · Young Adult</span>
+            <span class="module-badge mb-pregnant">🤰 LSTM Voice · Pregnant Women</span>
+            <span class="module-badge mb-elderly">👴 Random Forest GAD-7 · Elderly</span>
+          </div>
+        </div>
+
+        <!-- Research Gap -->
+        <div class="research-section">
+          <h3>Research Gap</h3>
+          <p>
+            Despite advances in AI-powered mental health tools, our analysis reveals several critical gaps. First, the majority of deployed applications rely on a single modality (e.g., facial expression alone or questionnaire alone), losing the complementary information encoded across multiple data streams.
+          </p>
+          <p>
+            Second, there is a persistent lack of demographic specificity. Children's limited verbal self-report capability, the physical constraints of pregnant women, and the lower digital literacy of elderly users are rarely addressed in a single unified platform. Existing tools are predominantly designed for working-age adults.
+          </p>
+          <p>
+            Third, the broader literature highlights persistent gaps in clinical validation — most mobile mental health applications have not been evaluated in partnership with licensed clinical professionals. ANXIETYSENSE directly addresses these gaps through its modular, demographically-segmented architecture, multi-modal fusion strategies, and rigorous expert clinical validation process involving three psychologists and two counselors.
+          </p>
+        </div>
+
+        <!-- Research Objectives -->
+        <div class="research-section">
+          <h3>Research Objectives</h3>
+          <p>ANXIETYSENSE addresses the identified demographic and modality gaps through the following objectives:</p>
+          <ul class="objectives-list">
+            <li>
+              Develop a child anxiety detection module combining real-time facial expression recognition (MobileNet V2) with a drawing-pattern ML classifier, producing a dual-modality anxiety index validated by licensed child psychologists.
+            </li>
+            <li>
+              Build a young adult anxiety assessment pipeline integrating CNN-based facial emotion detection with a GAD-7 adapted conversational chatbot, using sentiment analysis and confidence-weighted modality fusion.
+            </li>
+            <li>
+              Design a voice-based anxiety screening module for pregnant women using LSTM networks trained on MFCC, pitch, and energy features extracted from voice recordings, prioritising high-anxiety recall for screening utility.
+            </li>
+            <li>
+              Create a simplified, accessible GAD-7 assessment interface for elderly users with voice-reading support, backed by a Random Forest classifier trained on 312 counselor-validated assessments.
+            </li>
+            <li>
+              Integrate all four modules into a unified React Native mobile platform with a Firebase backend, a personalised recommendation engine delivering therapeutic activities, and longitudinal anxiety tracking for users and caregivers.
+            </li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════════ FEATURES ═══════════════ -->
+    <section class="section features" id="features">
+      <div class="container">
+        <div class="section-header">
+          <h2>Key Features</h2>
+          <p>Specialised AI modules delivering life-stage-appropriate anxiety detection and support</p>
+        </div>
+        <div class="features-grid">
+          <div class="feature-card fc-child">
+            <div class="feature-icon"><i class="fas fa-child"></i></div>
+            <h3>Child Anxiety Module</h3>
+            <p>Dual-modality approach combining MobileNet V2 facial expression recognition across five affective categories with a drawing pattern CNN classifier. Late fusion of both streams yields 85% combined accuracy, outperforming each sub-model individually.</p>
+          </div>
+          <div class="feature-card fc-young">
+            <div class="feature-icon"><i class="fas fa-user"></i></div>
+            <h3>Young Adult Module</h3>
+            <p>A five-layer CNN for real-time facial emotion classification fused with a GAD-7 adapted conversational chatbot applying NLP sentiment analysis. Confidence-weighted multimodal fusion achieves 88% composite accuracy.</p>
+          </div>
+          <div class="feature-card fc-pregnant">
+            <div class="feature-icon"><i class="fas fa-heartbeat"></i></div>
+            <h3>Pregnant Women Module</h3>
+            <p>Voice-based anxiety screening using a two-layer LSTM network (128 & 64 units) trained on 40-dimensional MFCC vectors, pitch contours, and energy envelopes. Achieves 82% recall on the clinically-prioritised high-anxiety class.</p>
+          </div>
+          <div class="feature-card fc-elderly">
+            <div class="feature-icon"><i class="fas fa-user-clock"></i></div>
+            <h3>Elderly Module</h3>
+            <p>GAD-7 questionnaire administered via a large-text, voice-reading-supported interface. A Random Forest classifier (200 estimators) trained on 312 clinical assessments achieves 98% accuracy with interpretable feature importance output.</p>
+          </div>
+          <div class="feature-card fc-rec">
+            <div class="feature-icon"><i class="fas fa-brain"></i></div>
+            <h3>Personalised Recommendations</h3>
+            <p>A unified recommendation engine delivers tailored therapeutic activities per demographic group and severity level — including guided breathing, mindfulness, journaling, CBT prompts, prenatal relaxation, and caregiver alerts for high-severity cases.</p>
+          </div>
+          <div class="feature-card fc-fire">
+            <div class="feature-icon"><i class="fas fa-database"></i></div>
+            <h3>Firebase & Longitudinal Tracking</h3>
+            <p>Encrypted real-time Firebase backend enables secure data storage, cross-session progress tracking, and longitudinal anxiety trend monitoring — allowing users, caregivers, and clinicians to monitor severity changes over time.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════════ TECHNOLOGIES ═══════════════ -->
+    <section class="section technologies" id="technologies">
+      <div class="container">
+        <div class="section-header">
+          <h2>Technologies Used</h2>
+          <p>Cutting-edge AI, mobile, and cloud technologies powering ANXIETYSENSE</p>
+        </div>
+        <div class="tech-grid">
+          <div class="tech-card">
+            <div class="tech-icon" style="background:linear-gradient(135deg,#5c6bc0,#7986cb);"><i class="fas fa-mobile-alt"></i></div>
+            <h3>React Native</h3>
+            <p>Cross-platform mobile development delivering a seamless Android experience with a single unified codebase across all four demographic modules.</p>
+          </div>
+          <div class="tech-card">
+            <div class="tech-icon" style="background:linear-gradient(135deg,#f59e0b,#fbbf24);"><i class="fas fa-fire"></i></div>
+            <h3>Firebase</h3>
+            <p>Encrypted real-time data storage, authentication, and longitudinal progress tracking backend supporting the unified recommendation engine.</p>
+          </div>
+          <div class="tech-card">
+            <div class="tech-icon" style="background:linear-gradient(135deg,#ef4444,#f87171);"><i class="fas fa-brain"></i></div>
+            <h3>TensorFlow & TF Lite</h3>
+            <p>Deep learning model development in TensorFlow with Google Colab training, exported to TensorFlow Lite for efficient on-device inference.</p>
+          </div>
+          <div class="tech-card">
+            <div class="tech-icon" style="background:linear-gradient(135deg,#10b981,#34d399);"><i class="fas fa-chart-bar"></i></div>
+            <h3>scikit-learn</h3>
+            <p>Random Forest classifier (200 estimators, stratified k-fold cross-validation) for the elderly GAD-7 module with interpretable feature importance analysis.</p>
+          </div>
+          <div class="tech-card">
+            <div class="tech-icon" style="background:linear-gradient(135deg,#8b5cf6,#a78bfa);"><i class="fas fa-microphone-alt"></i></div>
+            <h3>LSTM · Voice Analysis</h3>
+            <p>Two-layer LSTM network processing 40-dimensional MFCC vectors, fundamental frequency contours, and zero-crossing rates across sliding 25ms windows.</p>
+          </div>
+          <div class="tech-card">
+            <div class="tech-icon" style="background:linear-gradient(135deg,#3b82f6,#60a5fa);"><i class="fas fa-eye"></i></div>
+            <h3>MobileNet V2 · CNN</h3>
+            <p>Parameter-efficient MobileNet V2 for mobile facial emotion recognition, plus custom CNN architecture for drawing pattern classification in the child module.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════════ MILESTONES ═══════════════ -->
+    <section class="section milestones" id="milestones">
+      <div class="container">
+        <div class="section-header">
+          <h2>Project Milestones</h2>
+          <p>Key phases in the ANXIETYSENSE research and development journey</p>
+        </div>
+        <ul class="milestone-list">
+          <li class="milestone-item">
+            <div class="milestone-icon"><i class="fas fa-file-alt"></i></div>
+            <div class="milestone-content">
+              <h3>Project Proposal</h3>
+              <p>Defining the scope, objectives, methodology, and ethical framework for the ANXIETYSENSE multi-modal AI mental health platform</p>
+              <div class="milestone-date">August 2025 &nbsp;·&nbsp; 10%</div>
+            </div>
+          </li>
+          <li class="milestone-item">
+            <div class="milestone-icon"><i class="fas fa-tasks"></i></div>
+            <div class="milestone-content">
+              <h3>Progress Presentation I</h3>
+              <p>Initial module architecture design, dataset collection, model training baselines for child and young adult components</p>
+              <div class="milestone-date">December 2025 &nbsp;·&nbsp; 50%</div>
+            </div>
+          </li>
+          
+          <li class="milestone-item">
+            <div class="milestone-icon"><i class="fas fa-chart-pie"></i></div>
+            <div class="milestone-content">
+              <h3>Progress Presentation II</h3>
+              <p>Full platform integration demonstration, clinical expert evaluation with psychologists and counselors, and user usability testing (48 participants)</p>
+              <div class="milestone-date">March 2026 &nbsp;·&nbsp; 85%</div>
+            </div>
+          </li>
+          <li class="milestone-item">
+            <div class="milestone-icon"><i class="fas fa-book"></i></div>
+            <div class="milestone-content">
+              <h3>Final Report</h3>
+              <p>Complete project documentation covering implementation details, results analysis, clinical validation, and future work directions</p>
+              <div class="milestone-date">April 2026 &nbsp;·&nbsp; 93%</div>
+            </div>
+          </li>
+          <li class="milestone-item">
+            <div class="milestone-icon"><i class="fas fa-award"></i></div>
+            <div class="milestone-content">
+              <h3>Final Presentation & Viva</h3>
+              <p>Individual viva assessments evaluating each member's contribution to the ANXIETYSENSE ecosystem</p>
+              <div class="milestone-date">May 2026 &nbsp;·&nbsp; 100%</div>
+            </div>
+          </li>
+          <li class="milestone-item">
+            <div class="milestone-icon"><i class="fas fa-chart-line"></i></div>
+            <div class="milestone-content">
+              <h3>Research Paper Submission</h3>
+              <p>Comprehensive academic paper documenting the four-module AI ecosystem, methodology, and quantitative performance results</p>
+              <div class="milestone-date">May 2026 &nbsp;·&nbsp; 70%</div>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- ═══════════════ DOCUMENTS ═══════════════ -->
+    <section class="section documents" id="documents">
+      <div class="container">
+        <div class="section-header">
+          <h2>Project Documents</h2>
+          <p>Access ANXIETYSENSE research documentation, reports, and presentations</p>
+        </div>
+        <ul class="documents-list">
+
+          
+
+          <li class="document-item">
+            <div class="document-icon"><i class="fas fa-file-contract"></i></div>
+            <div class="document-content">
+              <h3>Project Proposal</h3>
+              <p>Original project proposal outlining scope, objectives, and methodology for the ANXIETYSENSE platform</p>
+              <a href="documents/Project_Proposal.pdf" class="document-link" onclick="togglePDF('pdf-proposal'); return false;">
+                View Document <i class="fas fa-arrow-right"></i>
+              </a>
+              <div class="pdf-viewer" id="pdf-proposal" style="display:none;">
+                <iframe src="documents/Project_Proposal.pdf"></iframe>
+              </div>
+            </div>
+          </li>
+
+          <li class="document-item">
+            <div class="document-icon"><i class="fas fa-file-powerpoint"></i></div>
+            <div class="document-content">
+              <h3>Proposal Presentation</h3>
+              <p>Slides outlining the ANXIETYSENSE project proposal, research objectives, and expected outcomes</p>
+              <a href="documents/Proposal-Presentation 25-26J-376.pdf" class="document-link" onclick="togglePDF('pdf-prop-ppt'); return false;">
+                View Slides <i class="fas fa-arrow-right"></i>
+              </a>
+              <div class="pdf-viewer" id="pdf-prop-ppt" style="display:none;">
+                <iframe src="documents/Proposal-Presentation 25-26J-376.pdf"></iframe>
+              </div>
+            </div>
+          </li>
+
+          <li class="document-item">
+            <div class="document-icon"><i class="fas fa-tasks"></i></div>
+            <div class="document-content">
+              <h3>Progress Presentation I</h3>
+              <p>First progress update — 50% completion showcasing initial module designs, data collection, and baseline model results</p>
+              <a href="documents/PP1 Presentation 25-26J-376.pdf" class="document-link" onclick="togglePDF('pdf-pp1'); return false;">
+                View Slides <i class="fas fa-arrow-right"></i>
+              </a>
+              <div class="pdf-viewer" id="pdf-pp1" style="display:none;">
+                <iframe src="documents/PP1 Presentation 25-26J-376.pdf"></iframe>
+              </div>
+            </div>
+          </li>
+
+          <li class="document-item">
+            <div class="document-icon"><i class="fas fa-chart-line"></i></div>
+            <div class="document-content">
+              <h3>Progress Presentation II</h3>
+              <p>Second progress update — 90% completion demonstrating full platform integration, clinical validation, and user study results</p>
+              <a href="documents/PP2 Presentation 25-26J-376 (1).pdf" class="document-link" onclick="togglePDF('pdf-pp2'); return false;">
+                View Slides <i class="fas fa-arrow-right"></i>
+              </a>
+              <div class="pdf-viewer" id="pdf-pp2" style="display:none;">
+                <iframe src="documents/PP2 Presentation 25-26J-376 (1).pdf"></iframe>
+              </div>
+            </div>
+          </li>
+
+          <li class="document-item">
+            <div class="document-icon"><i class="fas fa-trophy"></i></div>
+            <div class="document-content">
+              <h3>Final Presentation</h3>
+              <p>Comprehensive final presentation showcasing the complete ANXIETYSENSE platform, results, conclusions, and future work</p>
+              <a href="documents/Final Document (2).pdf" class="document-link" onclick="togglePDF('pdf-final-ppt'); return false;">
+                View Slides <i class="fas fa-arrow-right"></i>
+              </a>
+              <div class="pdf-viewer" id="pdf-final-ppt" style="display:none;">
+                <iframe src="documents/Final Document (2).pdf"></iframe>
+              </div>
+            </div>
+          </li>
+
+          <li class="document-item">
+            <div class="document-icon"><i class="fas fa-book"></i></div>
+            <div class="document-content">
+              <h3>Final Report (Group)</h3>
+              <p>Complete project documentation including all module implementations, evaluation methodology, and outcomes</p>
+              <a href="documents/Final Document (2).pdf" class="document-link" onclick="togglePDF('pdf-final-doc'); return false;">
+                View Document <i class="fas fa-arrow-right"></i>
+              </a>
+              <div class="pdf-viewer" id="pdf-final-doc" style="display:none;">
+                <iframe src="documents/Final_Report.pdf"></iframe>
+              </div>
+            </div>
+          </li>
+
+          <li class="document-item">
+            <div class="document-icon"><i class="fas fa-user-edit"></i></div>
+            <div class="document-content">
+              <h3>Individual Reports</h3>
+              <p>Personal research reports from each team member detailing individual contributions to the ANXIETYSENSE ecosystem</p>
+              <div style="display:flex;flex-wrap:wrap;gap:8px;margin-top:8px;">
+                <a href="documents/rusiru K.K.D 2.pdf" class="document-link" style="font-size:0.85rem;">K.K.D. Rusiru <i class="fas fa-download"></i></a>
+                <a href="documents/Individual Final Report_sample chathumi.pdf" class="document-link" style="font-size:0.85rem;">K.M.N.D. Karunarathna <i class="fas fa-download"></i></a>
+                <a href="documents/IT22099686 Final Thesis.pdf" class="document-link" style="font-size:0.85rem;">P.K.C. Navodya <i class="fas fa-download"></i></a>
+                <a href="documents/Individual_Report_Nisansala.pdf" class="document-link" style="font-size:0.85rem;">D.V.D. Nisansala <i class="fas fa-download"></i></a>
+              </div>
+            </div>
+          </li>
+
+          <li class="document-item">
+            <div class="document-icon"><i class="fas fa-file-alt"></i></div>
+            <div class="document-content">
+              <h3>Research Paper</h3>
+              <p>Full academic paper — ANXIETYSENSE: A Multi-Modal AI Ecosystem for LifeStage-Based Mental Health Support</p>
+              <a href="documents/ANXIETYSENSE_ (4).pdf" class="document-link" onclick="togglePDF('pdf-paper'); return false;">
+                View Document <i class="fas fa-arrow-right"></i>
+              </a>
+              <div class="pdf-viewer" id="pdf-paper" style="display:none;">
+                <iframe src="documents/"></iframe>
+              </div>
+            </div>
+          </li>
+
+        </ul>
+      </div>
+    </section>
+
+    <!-- ═══════════════ TEAM ═══════════════ -->
+    <section class="section team-section" id="team">
+      <div class="container">
+        <div class="section-header">
+          <h2>Our Team</h2>
+          <p>The researchers and clinical collaborators behind ANXIETYSENSE</p>
+        </div>
+
+        <!-- Supervisors -->
+        <div class="supervisor-section">
+          <h3>Supervisors</h3>
+          <div class="supervisors-grid">
+            <div class="supervisor-card">
+              <div class="supervisor-img">
+                <!-- Replace src with actual supervisor image path -->
+                <img src="assets/5.png" alt="Sanvitha Kasthuriarachchi"
+                  onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';" />
+                <div class="team-avatar-placeholder" style="display:none;width:100%;height:100%;align-items:center;justify-content:center;font-size:5rem;">👩‍🏫</div>
+              </div>
+              <div class="supervisor-content">
+                <h3>Sanvitha Kasthuriarachchi</h3>
+                <div class="supervisor-role">Supervisor</div>
+                <div class="supervisor-details">
+                  Department of Information Technology<br />SLIIT, Malabe Campus
+                </div>
+                <div class="team-socials">
+                  <a href="mailto:Sanvitha.k@sliit.lk" title="Email"><i class="far fa-envelope"></i></a>
+                </div>
+              </div>
+            </div>
+
+            <div class="supervisor-card">
+              <div class="supervisor-img">
+                <!-- Replace src with actual co-supervisor image path -->
+                <img src="assets/6.png" alt="Samali Amarasekara"
+                  onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';" />
+                <div class="team-avatar-placeholder" style="display:none;width:100%;height:100%;align-items:center;justify-content:center;font-size:5rem;">👩‍💼</div>
+              </div>
+              <div class="supervisor-content">
+                <h3>Samali Amarasekara</h3>
+                <div class="supervisor-role">Co-Supervisor</div>
+                <div class="supervisor-details">
+                  Department of Information Technology<br />SLIIT, Malabe Campus
+                </div>
+                <div class="team-socials">
+                  <a href="mailto:Samali.a@sliit.lk" title="Email"><i class="far fa-envelope"></i></a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <br /><br />
+
+        <!-- Team Members -->
+        <div class="team-grid">
+
+          <div class="team-card">
+            <div class="team-img">
+              <!-- Replace src with actual member image: assets/member1.jpg -->
+              <img src="assets/1.png" alt="K.K.D. Rusiru"
+                onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';" />
+              <div class="team-avatar-placeholder" style="display:none;width:100%;height:100%;align-items:center;justify-content:center;background:linear-gradient(135deg,#e0e7ff,#f3e8ff);">🧑‍💻</div>
+            </div>
+            <div class="team-content">
+              <h3>K.K.D. Rusiru</h3>
+              <div class="team-role">Child Anxiety Module</div>
+              <div class="team-id">IT22145284</div>
+            </div>
+            <div class="team-socials">
+              <a href="mailto:it22145284@my.sliit.lk" title="Email"><i class="far fa-envelope"></i></a>
+            </div>
+          </div>
+
+          <div class="team-card">
+            <div class="team-img">
+              <img src="assets/2.png" alt="K.M.N.D. Karunarathna"
+                onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';" />
+              <div class="team-avatar-placeholder" style="display:none;width:100%;height:100%;align-items:center;justify-content:center;background:linear-gradient(135deg,#fef3c7,#fce7f3);">👩‍💻</div>
+            </div>
+            <div class="team-content">
+              <h3>K.M.N.D. Karunarathna</h3>
+              <div class="team-role">Young Adult Module</div>
+              <div class="team-id">IT22099686</div>
+            </div>
+            <div class="team-socials">
+              <a href="mailto:it22099686@my.sliit.lk" title="Email"><i class="far fa-envelope"></i></a>
+            </div>
+          </div>
+
+          <div class="team-card">
+            <div class="team-img">
+              <img src="assets/3.png" alt="P.K.C. Navodya"
+                onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';" />
+              <div class="team-avatar-placeholder" style="display:none;width:100%;height:100%;align-items:center;justify-content:center;background:linear-gradient(135deg,#dbeafe,#ede9fe);">👩‍🔬</div>
+            </div>
+            <div class="team-content">
+              <h3>P.K.C. Navodya</h3>
+              <div class="team-role">Pregnant Women Module</div>
+              <div class="team-id">IT22217868</div>
+            </div>
+            <div class="team-socials">
+              <a href="mailto:it22217868@my.sliit.lk" title="Email"><i class="far fa-envelope"></i></a>
+            </div>
+          </div>
+
+          <div class="team-card">
+            <div class="team-img">
+              <img src="assets/4.png" alt="D.V.D. Nisansala"
+                onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';" />
+              <div class="team-avatar-placeholder" style="display:none;width:100%;height:100%;align-items:center;justify-content:center;background:linear-gradient(135deg,#d1fae5,#e0e7ff);">👩‍🎓</div>
+            </div>
+            <div class="team-content">
+              <h3>D.V.D. Nisansala</h3>
+              <div class="team-role">Elderly Module</div>
+              <div class="team-id">IT22121110</div>
+            </div>
+            <div class="team-socials">
+              <a href="mailto:it22121110@my.sliit.lk" title="Email"><i class="far fa-envelope"></i></a>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Clinical Collaborator -->
+        <div class="collaborator-box">
+          <div class="collab-icon">🏥</div>
+          <div class="collab-content">
+            <div class="collab-tag">Clinical Collaborator</div>
+            <h4>Mr. S.M. Dissanayake</h4>
+            <p>A-grade Counselor — Expert clinical validation of anxiety severity classifications and therapeutic intervention appropriateness for all four ANXIETYSENSE modules</p>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ═══════════════ CONTACT ═══════════════ -->
+    <section class="section contact" id="contact">
+      <div class="container">
+        <div class="section-header">
+          <h2>Contact Us</h2>
+          <p>Get in touch with the ANXIETYSENSE research team</p>
+        </div>
+        <div class="contact-container">
+          <div class="contact-info">
+            <h3>Contact Information</h3>
+            <div class="contact-item">
+              <i class="fas fa-map-marker-alt"></i>
+              <div class="contact-text">
+                <h4>Address</h4>
+                <p>SLIIT Malabe Campus, New Kandy Road, Malabe, Sri Lanka</p>
+              </div>
+            </div>
+            <div class="contact-item">
+              <i class="fas fa-envelope"></i>
+              <div class="contact-text">
+                <h4>Email</h4>
+                <p>dinithrusiru1@gmail.com</p>
+              </div>
+            </div>
+            <div class="contact-item">
+              <i class="fas fa-phone-alt"></i>
+              <div class="contact-text">
+                <h4>Phone</h4>
+                <p>+9477 3508025</p>
+              </div>
+            </div>
+            <div class="contact-item">
+              <i class="fas fa-clock"></i>
+              <div class="contact-text">
+                <h4>Working Hours</h4>
+                <p>Monday to Friday: 9:00 AM – 5:00 PM</p>
+              </div>
+            </div>
+            <div class="contact-item">
+              <i class="fas fa-university"></i>
+              <div class="contact-text">
+                <h4>Department</h4>
+                <p>Department of Information Technology, SLIIT</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="contact-form">
+            <h3>Send Us a Message</h3>
+            <form id="contactForm">
+              <div class="form-group">
+                <input type="text" class="form-control" placeholder="Your Name" required />
+              </div>
+              <div class="form-group">
+                <input type="email" class="form-control" placeholder="Your Email" required />
+              </div>
+              <div class="form-group">
+                <input type="text" class="form-control" placeholder="Subject" />
+              </div>
+              <div class="form-group">
+                <textarea class="form-control" placeholder="Your Message" required></textarea>
+              </div>
+              <button type="submit" class="btn">Send Message</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════════ FOOTER ═══════════════ -->
+    <footer>
+      <div class="container">
+        <div class="footer-grid">
+          <div class="footer-col">
+            <h3>ANXIETYSENSE</h3>
+            <p>A Multi-Modal AI Ecosystem for LifeStage-Based Mental Health Support — detecting and managing anxiety across children, young adults, pregnant women, and elderly individuals through specialised AI pipelines.</p>
+            <div class="footer-social">
+              <a href="#"><i class="fab fa-facebook-f"></i></a>
+              <a href="#"><i class="fab fa-twitter"></i></a>
+              <a href="#"><i class="fab fa-linkedin-in"></i></a>
+              <a href="#"><i class="fab fa-github"></i></a>
+            </div>
+          </div>
+          <div class="footer-col">
+            <h3>Quick Links</h3>
+            <ul class="footer-links">
+              <li><a href="#home"><i class="fas fa-chevron-right"></i> Home</a></li>
+              <li><a href="#domain"><i class="fas fa-chevron-right"></i> Domain</a></li>
+              <li><a href="#features"><i class="fas fa-chevron-right"></i> Features</a></li>
+              <li><a href="#technologies"><i class="fas fa-chevron-right"></i> Technologies</a></li>
+              <li><a href="#milestones"><i class="fas fa-chevron-right"></i> Milestones</a></li>
+              <li><a href="#documents"><i class="fas fa-chevron-right"></i> Documents</a></li>
+              <li><a href="#team"><i class="fas fa-chevron-right"></i> Team</a></li>
+              <li><a href="#contact"><i class="fas fa-chevron-right"></i> Contact</a></li>
+            </ul>
+          </div>
+          <div class="footer-col">
+            <h3>Modules</h3>
+            <ul class="footer-links">
+              <li><a href="#features"><i class="fas fa-chevron-right"></i> 🧒 Child Anxiety</a></li>
+              <li><a href="#features"><i class="fas fa-chevron-right"></i> 🧑 Young Adult</a></li>
+              <li><a href="#features"><i class="fas fa-chevron-right"></i> 🤰 Pregnant Women</a></li>
+              <li><a href="#features"><i class="fas fa-chevron-right"></i> 👴 Elderly</a></li>
+              <li><a href="#features"><i class="fas fa-chevron-right"></i> Recommendation Engine</a></li>
+              <li><a href="#documents"><i class="fas fa-chevron-right"></i> Research Paper</a></li>
+            </ul>
+          </div>
+          <div class="footer-col">
+            <h3>Newsletter</h3>
+            <p>Subscribe for updates on the ANXIETYSENSE research project progress and publications.</p>
+            <form style="margin-top:1rem;">
+              <div class="form-group">
+                <input type="email" class="form-control" placeholder="Your Email" required />
+              </div>
+              <button type="submit" class="btn" style="margin-top:0.5rem;font-size:0.9rem;padding:0.6rem 1.5rem;">Subscribe</button>
+            </form>
+          </div>
+        </div>
+        <div class="footer-bottom">
+          <p>© 2025 ANXIETYSENSE Research Project · IT4010 · Sri Lanka Institute of Information Technology · Department of Information Technology</p>
+        </div>
+      </div>
+    </footer>
+
+    <!-- Back to Top -->
+    <a href="#home" class="back-to-top" id="backToTop">
+      <i class="fas fa-arrow-up"></i>
+    </a>
+
+    <!-- ═══════════════ JS ═══════════════ -->
+    <script>
+      // Mobile nav toggle
+      const navToggle = document.getElementById("navToggle");
+      const nav = document.getElementById("nav");
+      navToggle.addEventListener("click", () => nav.classList.toggle("active"));
+
+      // Search
+      document.getElementById("searchForm").addEventListener("submit", function (e) {
+        e.preventDefault();
+        const term = document.getElementById("searchInput").value.toLowerCase().trim();
+        if (!term) return;
+        const map = {
+          home: "#home", domain: "#domain", features: "#features",
+          technologies: "#technologies", milestones: "#milestones",
+          documents: "#documents", team: "#team", contact: "#contact",
+          child: "#features", young: "#features", pregnant: "#features",
+          elderly: "#features", anxiety: "#domain", research: "#domain",
+          literature: "#domain", objectives: "#domain", methodology: "#domain",
+          firebase: "#technologies", tensorflow: "#technologies", lstm: "#technologies",
+          "random forest": "#technologies", mobilenet: "#technologies",
+        };
+        let target = null;
+        for (const key in map) {
+          if (term.includes(key) || key.includes(term)) { target = map[key]; break; }
+        }
+        if (target) {
+          document.querySelector(target).scrollIntoView({ behavior: "smooth" });
+        } else {
+          alert("No matching section found for: " + term);
+        }
+        document.getElementById("searchInput").value = "";
+      });
+
+      // Smooth scroll + active nav
+      document.querySelectorAll("nav ul li a").forEach(anchor => {
+        anchor.addEventListener("click", function (e) {
+          e.preventDefault();
+          document.querySelectorAll("nav ul li a").forEach(l => l.classList.remove("active"));
+          this.classList.add("active");
+          document.querySelector(this.getAttribute("href")).scrollIntoView({ behavior: "smooth" });
+          nav.classList.remove("active");
+        });
+      });
+
+      // Active nav on scroll
+      window.addEventListener("scroll", () => {
+        const sections = document.querySelectorAll("section[id]");
+        let current = "";
+        sections.forEach(s => {
+          if (scrollY >= s.offsetTop - 200) current = s.getAttribute("id");
+        });
+        document.querySelectorAll("nav ul li a").forEach(link => {
+          link.classList.remove("active");
+          if (link.getAttribute("href") === `#${current}`) link.classList.add("active");
+        });
+        const btn = document.getElementById("backToTop");
+        btn.classList.toggle("visible", window.scrollY > 300);
+      });
+
+      // Back to top
+      document.getElementById("backToTop").addEventListener("click", e => {
+        e.preventDefault();
+        window.scrollTo({ top: 0, behavior: "smooth" });
+      });
+
+      // PDF toggle
+      function togglePDF(id) {
+        const el = document.getElementById(id);
+        el.style.display = el.style.display === "none" || !el.style.display ? "block" : "none";
+      }
+
+      // Contact form
+      document.getElementById("contactForm").addEventListener("submit", function(e) {
+        e.preventDefault();
+        alert("Thank you for your message! We will get back to you soon.");
+        this.reset();
+      });
+    </script>
+  </body>
+</html>
